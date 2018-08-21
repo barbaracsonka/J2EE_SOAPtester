@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.word.hu/Word" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="WordService" targetNamespace="http://www.word.hu/Word" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://www.word.hu/Word" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="DeleteDictionary" type="tns:DeleteDictionary" />
+      <xs:element name="DeleteDictionaryResponse" type="tns:DeleteDictionaryResponse" />
+      <xs:element name="DeleteTranslation" type="tns:DeleteTranslation" />
+      <xs:element name="DeleteTranslationResponse" type="tns:DeleteTranslationResponse" />
+      <xs:element name="Dictionary" nillable="true" type="xs:anyType" />
+      <xs:element name="EditTranslation" type="tns:EditTranslation" />
+      <xs:element name="EditTranslationResponse" type="tns:EditTranslationResponse" />
+      <xs:element name="ErrorTest" type="tns:ErrorTest" />
+      <xs:element name="ErrorTestResponse" type="tns:ErrorTestResponse" />
+      <xs:element name="GetDictionaries" type="tns:GetDictionaries" />
+      <xs:element name="GetDictionariesResponse" type="tns:GetDictionariesResponse" />
+      <xs:element name="GetTranslationsForDictionary" type="tns:GetTranslationsForDictionary" />
+      <xs:element name="GetTranslationsForDictionaryResponse" type="tns:GetTranslationsForDictionaryResponse" />
+      <xs:element name="NewDictionary" type="tns:NewDictionary" />
+      <xs:element name="NewDictionaryResponse" type="tns:NewDictionaryResponse" />
+      <xs:element name="NewTranslation" type="tns:NewTranslation" />
+      <xs:element name="NewTranslationResponse" type="tns:NewTranslationResponse" />
+      <xs:element name="ServiceError" type="tns:errorStub" />
+      <xs:complexType name="EditTranslation">
+        <xs:sequence>
+          <xs:element name="id" type="xs:long" />
+          <xs:element name="from" type="xs:string" />
+          <xs:element name="to" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="EditTranslationResponse">
+        <xs:sequence>
+          <xs:element name="edited" type="xs:boolean" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="errorStub">
+        <xs:sequence>
+          <xs:element name="code" type="xs:int" />
+          <xs:element minOccurs="0" name="field" type="xs:string" />
+          <xs:element minOccurs="0" name="message" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="DeleteTranslation">
+        <xs:sequence>
+          <xs:element name="id" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="DeleteTranslationResponse">
+        <xs:sequence>
+          <xs:element name="deleted" type="xs:boolean" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="DeleteDictionary">
+        <xs:sequence>
+          <xs:element name="id" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="DeleteDictionaryResponse">
+        <xs:sequence>
+          <xs:element name="deleted" type="xs:boolean" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetTranslationsForDictionary">
+        <xs:sequence>
+          <xs:element name="dictionaryId" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetTranslationsForDictionaryResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Translation" type="tns:translationStub" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="translationStub">
+        <xs:sequence />
+        <xs:attribute name="id" type="xs:long" />
+        <xs:attribute name="dictionaryId" type="xs:long" />
+        <xs:attribute name="original" type="xs:string" />
+        <xs:attribute name="translation" type="xs:string" />
+      </xs:complexType>
+      <xs:complexType name="GetDictionaries">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="GetDictionariesResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Dictionary" type="tns:dictionaryStub" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="dictionaryStub">
+        <xs:sequence />
+        <xs:attribute name="id" type="xs:long" />
+        <xs:attribute name="name" type="xs:string" />
+        <xs:attribute name="type" type="xs:string" />
+      </xs:complexType>
+      <xs:complexType name="NewTranslation">
+        <xs:sequence>
+          <xs:element name="dictionaryid" type="xs:long" />
+          <xs:element name="from" type="xs:string" />
+          <xs:element name="to" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="NewTranslationResponse">
+        <xs:sequence>
+          <xs:element name="created" type="xs:boolean" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ErrorTest">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="ErrorTestResponse">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="NewDictionary">
+        <xs:sequence>
+          <xs:element name="name" type="xs:string" />
+          <xs:element name="type" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="NewDictionaryResponse">
+        <xs:sequence>
+          <xs:element name="created" type="xs:boolean" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="WordFault" nillable="true" type="tns:errorStub" />
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="DeleteTranslation">
+    <wsdl:part name="parameters" element="tns:DeleteTranslation" />
+  </wsdl:message>
+  <wsdl:message name="DeleteDictionary">
+    <wsdl:part name="parameters" element="tns:DeleteDictionary" />
+  </wsdl:message>
+  <wsdl:message name="GetTranslationsForDictionaryResponse">
+    <wsdl:part name="parameters" element="tns:GetTranslationsForDictionaryResponse" />
+  </wsdl:message>
+  <wsdl:message name="ErrorTest">
+    <wsdl:part name="parameters" element="tns:ErrorTest" />
+  </wsdl:message>
+  <wsdl:message name="EditTranslation">
+    <wsdl:part name="parameters" element="tns:EditTranslation" />
+  </wsdl:message>
+  <wsdl:message name="DeleteTranslationResponse">
+    <wsdl:part name="parameters" element="tns:DeleteTranslationResponse" />
+  </wsdl:message>
+  <wsdl:message name="AdaptorException">
+    <wsdl:part name="AdaptorException" element="tns:WordFault" />
+  </wsdl:message>
+  <wsdl:message name="EditTranslationResponse">
+    <wsdl:part name="parameters" element="tns:EditTranslationResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteDictionaryResponse">
+    <wsdl:part name="parameters" element="tns:DeleteDictionaryResponse" />
+  </wsdl:message>
+  <wsdl:message name="NewTranslationResponse">
+    <wsdl:part name="parameters" element="tns:NewTranslationResponse" />
+  </wsdl:message>
+  <wsdl:message name="ErrorTestResponse">
+    <wsdl:part name="parameters" element="tns:ErrorTestResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTranslationsForDictionary">
+    <wsdl:part name="parameters" element="tns:GetTranslationsForDictionary" />
+  </wsdl:message>
+  <wsdl:message name="GetDictionariesResponse">
+    <wsdl:part name="parameters" element="tns:GetDictionariesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDictionaries">
+    <wsdl:part name="parameters" element="tns:GetDictionaries" />
+  </wsdl:message>
+  <wsdl:message name="NewTranslation">
+    <wsdl:part name="parameters" element="tns:NewTranslation" />
+  </wsdl:message>
+  <wsdl:message name="NewDictionaryResponse">
+    <wsdl:part name="parameters" element="tns:NewDictionaryResponse" />
+  </wsdl:message>
+  <wsdl:message name="NewDictionary">
+    <wsdl:part name="parameters" element="tns:NewDictionary" />
+  </wsdl:message>
+  <wsdl:portType name="Word">
+    <wsdl:operation name="EditTranslation">
+      <wsdl:input name="EditTranslation" message="tns:EditTranslation" />
+      <wsdl:output name="EditTranslationResponse" message="tns:EditTranslationResponse" />
+      <wsdl:fault name="AdaptorException" message="tns:AdaptorException" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTranslation">
+      <wsdl:input name="DeleteTranslation" message="tns:DeleteTranslation" />
+      <wsdl:output name="DeleteTranslationResponse" message="tns:DeleteTranslationResponse" />
+      <wsdl:fault name="AdaptorException" message="tns:AdaptorException" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteDictionary">
+      <wsdl:input name="DeleteDictionary" message="tns:DeleteDictionary" />
+      <wsdl:output name="DeleteDictionaryResponse" message="tns:DeleteDictionaryResponse" />
+      <wsdl:fault name="AdaptorException" message="tns:AdaptorException" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTranslationsForDictionary">
+      <wsdl:input name="GetTranslationsForDictionary" message="tns:GetTranslationsForDictionary" />
+      <wsdl:output name="GetTranslationsForDictionaryResponse" message="tns:GetTranslationsForDictionaryResponse" />
+      <wsdl:fault name="AdaptorException" message="tns:AdaptorException" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDictionaries">
+      <wsdl:input name="GetDictionaries" message="tns:GetDictionaries" />
+      <wsdl:output name="GetDictionariesResponse" message="tns:GetDictionariesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="NewTranslation">
+      <wsdl:input name="NewTranslation" message="tns:NewTranslation" />
+      <wsdl:output name="NewTranslationResponse" message="tns:NewTranslationResponse" />
+      <wsdl:fault name="AdaptorException" message="tns:AdaptorException" />
+    </wsdl:operation>
+    <wsdl:operation name="ErrorTest">
+      <wsdl:input name="ErrorTest" message="tns:ErrorTest" />
+      <wsdl:output name="ErrorTestResponse" message="tns:ErrorTestResponse" />
+      <wsdl:fault name="AdaptorException" message="tns:AdaptorException" />
+    </wsdl:operation>
+    <wsdl:operation name="NewDictionary">
+      <wsdl:input name="NewDictionary" message="tns:NewDictionary" />
+      <wsdl:output name="NewDictionaryResponse" message="tns:NewDictionaryResponse" />
+      <wsdl:fault name="AdaptorException" message="tns:AdaptorException" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WordServiceSoapBinding" type="tns:Word">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="EditTranslation">
+      <soap:operation soapAction="http://www.word.hu/Word/editTranslation" style="document" />
+      <wsdl:input name="EditTranslation">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="EditTranslationResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AdaptorException">
+        <soap:fault use="literal" name="AdaptorException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTranslation">
+      <soap:operation soapAction="http://www.word.hu/Word/deleteTranslation" style="document" />
+      <wsdl:input name="DeleteTranslation">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="DeleteTranslationResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AdaptorException">
+        <soap:fault use="literal" name="AdaptorException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteDictionary">
+      <soap:operation soapAction="http://www.word.hu/Word/deleteDictionary" style="document" />
+      <wsdl:input name="DeleteDictionary">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="DeleteDictionaryResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AdaptorException">
+        <soap:fault use="literal" name="AdaptorException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetTranslationsForDictionary">
+      <soap:operation soapAction="http://www.word.hu/Word/getTranslationsForDictionary" style="document" />
+      <wsdl:input name="GetTranslationsForDictionary">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetTranslationsForDictionaryResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AdaptorException">
+        <soap:fault use="literal" name="AdaptorException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetDictionaries">
+      <soap:operation soapAction="http://www.word.hu/Word/getDictionaries" style="document" />
+      <wsdl:input name="GetDictionaries">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetDictionariesResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewTranslation">
+      <soap:operation soapAction="http://www.word.hu/Word/newTranslation" style="document" />
+      <wsdl:input name="NewTranslation">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="NewTranslationResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AdaptorException">
+        <soap:fault use="literal" name="AdaptorException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ErrorTest">
+      <soap:operation soapAction="http://www.word.hu/Word/errorTest" style="document" />
+      <wsdl:input name="ErrorTest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ErrorTestResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AdaptorException">
+        <soap:fault use="literal" name="AdaptorException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="NewDictionary">
+      <soap:operation soapAction="http://www.word.hu/Word/newDictionary" style="document" />
+      <wsdl:input name="NewDictionary">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="NewDictionaryResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AdaptorException">
+        <soap:fault use="literal" name="AdaptorException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WordService">
+    <wsdl:port name="WordPort" binding="tns:WordServiceSoapBinding">
+      <soap:address location="http://localhost:8080/ws/WordService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

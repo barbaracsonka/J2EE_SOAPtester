@@ -1,0 +1,44 @@
+﻿<Window x:Class="J2EE_SOAPtester.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:J2EE_SOAPtester"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="248*"/>
+            <ColumnDefinition Width="158*"/>
+            <ColumnDefinition Width="241*"/>
+            <ColumnDefinition Width="145*"/>
+        </Grid.ColumnDefinitions>
+        <ListBox x:Name="lb_dicts" Grid.Column="0" SelectionChanged="lb_dicts_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="{Binding name}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Grid.Column="1">
+            <Button Margin="10" Content="New dictionary" Click="Button_Click_2" />
+            <Button Margin="10" Content="Delete dictionary" Click="Button_Click_1" />
+        </StackPanel>
+        <ListBox x:Name="lb_words" Grid.Column="2">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="{Binding original}" Background="LightBlue" />
+                        <Label Content="{Binding translation}" Background="LightGreen" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Grid.Column="3">
+            <Button Margin="10" Content="New word" Click="Button_Click" />
+            <Button Margin="10" Content="Delete word" Click="Button_Click_3" />
+        </StackPanel>
+    </Grid>
+</Window>
